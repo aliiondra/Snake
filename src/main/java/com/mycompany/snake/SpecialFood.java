@@ -4,20 +4,14 @@
  */
 package com.mycompany.snake;
 
-import java.awt.List;
-import java.util.ArrayList;
-
 /**
  *
  * @author alu11563090
  */
-public class Snake {
-    
-    private ArrayList<Node> nodes;
-    private Direction direction;
+public class SpecialFood extends Food {
 
-    public Snake(List nodes, Direction direction) {
-        nodes = new ArrayList<>;
-        this.direction = direction;
+    public SpecialFood(int row, int col) {
+        super(row, col);
     }
+    
 }

@@ -4,20 +4,16 @@
  */
 package com.mycompany.snake;
 
-import java.awt.List;
-import java.util.ArrayList;
-
 /**
  *
  * @author alu11563090
  */
-public class Snake {
-    
-    private ArrayList<Node> nodes;
-    private Direction direction;
+public class Node {
+    private int row;
+    private int col;
 
-    public Snake(List nodes, Direction direction) {
-        nodes = new ArrayList<>;
-        this.direction = direction;
+    public Node(int row, int col) {
+        this.row = row;
+        this.col = col;
     }
 }
