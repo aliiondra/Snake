@@ -10,6 +10,11 @@ package com.mycompany.snake;
  */
 public class Board extends javax.swing.JPanel {
 
+    public static final int NUM_ROWS = 30;
+    public static final int NUM_COLS = 20;
+    
+    public Snake snake;
+
     /**
      * Creates new form Board
      */

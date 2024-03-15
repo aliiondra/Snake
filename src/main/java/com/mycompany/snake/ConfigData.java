@@ -8,12 +8,16 @@ package com.mycompany.snake;
  *
  * @author alu11563090
  */
-public class SpecialFood extends Food {
-
-    public SpecialFood(int row, int col) {
-        super(row, col);
+public class ConfigData {
+    private String playerName;
+    private int score;
+    private Level level;
+    private int deltaTime;
+    
+    public ConfigData() {
+        playerName = "";
+        score = 0;
+        level = Level.BEGINNER;
+        deltaTime = 500;
     }
-    
-    
-    
 }
