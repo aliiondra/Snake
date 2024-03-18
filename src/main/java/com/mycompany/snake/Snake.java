@@ -25,7 +25,7 @@ public class Snake {
         nodes.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 1));
         nodes.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 2));
         nodes.add(new Node(Board.NUM_ROWS / 2, Board.NUM_COLS / 2 - 3));
-        direction = Direction.DOWN;
+        direction = Direction.RIGHT;
         nodesToGrow = 0;
     }
 
@@ -45,6 +45,41 @@ public class Snake {
             }
             Util.drawSquare(g, node.getRow(), node.getCol(), color, squareWidht, squareHeight);
         }
+    }
+
+    public void move() {
+        Node node = nodes.get(0);
+        int currentRow = node.getRow();
+        int currentCol = node.getCol();
+        switch (direction) {
+            case UP:
+                currentRow--;
+                break;
+            case DOWN:
+                currentRow++;
+                break;
+            case LEFT:
+                currentCol--;
+                break;
+            case RIGHT:
+                currentCol++;
+                break;
+        }
+        Node newNode = new Node(currentRow, currentCol);
+        if (canMove(newNode)) {
+            getNodes().add(0, newNode);
+            if (nodesToGrow == 0) {
+                getNodes().remove(getNodes().size() - 1);
+            }
+        }
+    }
+
+    public boolean canMove(Node node) {
+        if (node.getRow() < 0 || node.getRow() > Board.NUM_ROWS
+                || node.getCol() < 0 || node.getCol() > Board.NUM_COLS) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -4,6 +4,9 @@
  */
 package com.mycompany.snake;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author alu11563090
@@ -14,6 +17,9 @@ public class SpecialFood extends Food {
         super(row, col);
     }
     
-    
+    public void paint(Graphics g, int squareWidht, int squareHeight) {
+        Color color = Color.RED;
+        Util.drawSquare(g, getRow(), getCol(), color, squareWidht, squareHeight);
+    }
     
 }
