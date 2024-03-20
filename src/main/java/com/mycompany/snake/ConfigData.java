@@ -19,7 +19,7 @@ public class ConfigData {
         playerName = "";
         score = 0;
         level = Level.BEGINNER;
-        deltaTime = 500;
+        deltaTime = 400;
     }
     
     public static ConfigData getInstance() {

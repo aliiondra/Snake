@@ -33,6 +33,10 @@ public class Snake {
         return nodes;
     }
 
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
     public void paint(Graphics g, int squareWidht, int squareHeight) {
         boolean firstNode = true;
         Color color;
@@ -46,11 +50,18 @@ public class Snake {
             Util.drawSquare(g, node.getRow(), node.getCol(), color, squareWidht, squareHeight);
         }
     }
-
+    
+    public Node getHeadNode() {
+        return nodes.get(0);
+    }
+    
+    public Node getTailNode() {
+        return nodes.get(nodes.size() - 1);
+    }
+    
     public void move() {
-        Node node = nodes.get(0);
-        int currentRow = node.getRow();
-        int currentCol = node.getCol();
+        int currentRow = getHeadNode().getRow();
+        int currentCol = getHeadNode().getCol();
         switch (direction) {
             case UP:
                 currentRow--;
@@ -67,19 +78,29 @@ public class Snake {
         }
         Node newNode = new Node(currentRow, currentCol);
         if (canMove(newNode)) {
-            getNodes().add(0, newNode);
+            nodes.add(0, newNode);
             if (nodesToGrow == 0) {
-                getNodes().remove(getNodes().size() - 1);
+                nodes.remove(getTailNode());
+            } else {
+                nodesToGrow--;
             }
         }
     }
 
     public boolean canMove(Node node) {
-        if (node.getRow() < 0 || node.getRow() > Board.NUM_ROWS
-                || node.getCol() < 0 || node.getCol() > Board.NUM_COLS) {
-            return false;
-        }
-        return true;
+        return !(node.getRow() < 0 || node.getRow() >= Board.NUM_ROWS
+                || node.getCol() < 0 || node.getCol() >= Board.NUM_COLS);
     }
 
+    public boolean checkCollision(Food food) {
+        Node head = nodes.get(0);
+           return head.getRow() == food.getRow() && head.getCol() == food.getCol();
+    }
+    
+    public void eat(Food food) {
+        Node head = nodes.get(0);
+        if (head.getRow() == food.getRow() && head.getCol() == food.getCol()) {
+            nodesToGrow++;
+        }
+    }
 }
