@@ -50,15 +50,15 @@ public class Snake {
             Util.drawSquare(g, node.getRow(), node.getCol(), color, squareWidht, squareHeight);
         }
     }
-    
+
     public Node getHeadNode() {
         return nodes.get(0);
     }
-    
+
     public Node getTailNode() {
         return nodes.get(nodes.size() - 1);
     }
-    
+
     public void move() {
         int currentRow = getHeadNode().getRow();
         int currentCol = getHeadNode().getCol();
@@ -91,16 +91,30 @@ public class Snake {
         return !(node.getRow() < 0 || node.getRow() >= Board.NUM_ROWS
                 || node.getCol() < 0 || node.getCol() >= Board.NUM_COLS);
     }
+    
+    /*public boolean checkSnakeCollision(Node node) {
+        for (Node n : nodes) {
+            if (n.getRow() == node.getRow() && n.getCol() == node.getCol()) {
+                return true;
+            }
+        }
+        return false;
+    }*/
 
     public boolean checkCollision(Food food) {
         Node head = nodes.get(0);
-           return head.getRow() == food.getRow() && head.getCol() == food.getCol();
+        return head.getRow() == food.getRow() && head.getCol() == food.getCol();
+    }
+
+    public void eatFood(Food food) {
+        if (checkCollision(food)) {
+            nodesToGrow = 1;
+        }
     }
     
-    public void eat(Food food) {
-        Node head = nodes.get(0);
-        if (head.getRow() == food.getRow() && head.getCol() == food.getCol()) {
-            nodesToGrow++;
+    public void eatSpecialFood(Food food) {
+        if (checkCollision(food)) {
+            nodesToGrow = 3;
         }
     }
 }

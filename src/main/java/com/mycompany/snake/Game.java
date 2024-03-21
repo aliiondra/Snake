@@ -37,8 +37,6 @@ public class Game extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        board.setLayout(new java.awt.GridLayout(1, 0));
         getContentPane().add(board, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");

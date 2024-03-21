@@ -24,6 +24,4 @@ public class Node {
     public int getCol() {
         return col;
     }
-    
-    
 }
