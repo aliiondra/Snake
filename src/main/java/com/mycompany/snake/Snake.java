@@ -42,7 +42,7 @@ public class Snake {
         Color color;
         for (Node node : nodes) {
             if (firstNode) {
-                color = Color.red;
+                color = Color.pink;
                 firstNode = false;
             } else {
                 color = Color.yellow;
@@ -78,10 +78,10 @@ public class Snake {
         }
         Node newNode = new Node(currentRow, currentCol);
         if (canMove(newNode)) {
-            nodes.add(0, newNode);
+                nodes.add(0, newNode);
             if (nodesToGrow == 0) {
                 nodes.remove(getTailNode());
-            } else {
+            } else if (nodesToGrow > 0) {
                 nodesToGrow--;
             }
         }
@@ -101,19 +101,19 @@ public class Snake {
         return false;
     }*/
 
-    public boolean checkCollision(Food food) {
+    public boolean checkCollision(Node node) {
         Node head = nodes.get(0);
-        return head.getRow() == food.getRow() && head.getCol() == food.getCol();
+        return head.getRow() == node.getRow() && head.getCol() == node.getCol();
     }
 
-    public void eatFood(Food food) {
-        if (checkCollision(food)) {
+    public void eatFood(Node node) {
+        if (checkCollision(node)) {
             nodesToGrow = 1;
         }
     }
     
-    public void eatSpecialFood(Food food) {
-        if (checkCollision(food)) {
+    public void eatSpecialFood(Node node) {
+        if (checkCollision(node)) {
             nodesToGrow = 3;
         }
     }

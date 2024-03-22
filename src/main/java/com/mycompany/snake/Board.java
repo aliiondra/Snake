@@ -37,13 +37,13 @@ public class Board extends javax.swing.JPanel {
                 case KeyEvent.VK_LEFT:
                     snake.setDirection(Direction.LEFT);
                     break;
-                /*case KeyEvent.VK_SPACE:
+                case KeyEvent.VK_SPACE:
                     if (timer.isRunning()) {
                         timer.stop();
                     } else {
                         timer.start();
                     }
-                    break;*/
+                    break;
             }
             repaint();
         }
@@ -112,7 +112,7 @@ public class Board extends javax.swing.JPanel {
             generateRandomFood();
         }
         if (snake.checkCollision(specialFood)) {
-            snake.eatFood(specialFood);
+            snake.eatSpecialFood(specialFood);
             generateRandomSpecialFood();
         }
         repaint();
@@ -120,10 +120,10 @@ public class Board extends javax.swing.JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
-        g.setColor(Color.GRAY);
-        g.fillRect(0, 0, getWidth(), getHeight());
-        //g.drawRect(0, 0, getWidth() / NUM_COLS * NUM_COLS, getHeight() / NUM_ROWS * NUM_ROWS);
+        super.paintComponent(g);
+        //g.setColor(Color.GRAY);
+        //g.fillRect(0, 0, getWidth(), getHeight());
+        g.drawRect(0, 0, getWidth() / NUM_COLS * NUM_COLS, getHeight() / NUM_ROWS * NUM_ROWS);
         if (snake != null) {
             snake.paint(g, getSquareWidth(), getSquareHeight());
         }

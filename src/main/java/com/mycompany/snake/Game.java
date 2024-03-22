@@ -18,7 +18,8 @@ public class Game extends javax.swing.JFrame {
     public Game() {
         initComponents();
         setLocationRelativeTo(null);
-        board.setPreferredSize(new Dimension(getWidth() * Board.NUM_ROWS, getHeight() * Board.NUM_COLS));
+        //board.setPreferredSize(new Dimension(getWidth() * Board.NUM_ROWS, getHeight() * Board.NUM_COLS));
+        
         pack();
     }
 
@@ -31,21 +32,28 @@ public class Game extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scoreBoard = new com.mycompany.snake.ScoreBoard();
         board = new com.mycompany.snake.Board();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        scoreBoard.setBorder(new javax.swing.border.MatteBorder(null));
+        scoreBoard.setMinimumSize(new java.awt.Dimension(40, 10));
+        scoreBoard.setOpaque(false);
+        scoreBoard.setPreferredSize(new java.awt.Dimension(40, 10));
+        getContentPane().add(scoreBoard, java.awt.BorderLayout.PAGE_END);
         getContentPane().add(board, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenuBar.add(jMenu1);
 
         jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuBar.add(jMenu2);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -89,6 +97,7 @@ public class Game extends javax.swing.JFrame {
     private com.mycompany.snake.Board board;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar;
+    private com.mycompany.snake.ScoreBoard scoreBoard;
     // End of variables declaration//GEN-END:variables
 }
