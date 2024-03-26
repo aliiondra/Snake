@@ -4,8 +4,6 @@
  */
 package com.mycompany.snake;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -55,8 +53,11 @@ public class Board extends javax.swing.JPanel {
     private Snake snake;
     private Food food;
     private SpecialFood specialFood;
+    private boolean specialFoodVisible;
+    private int specialFoodTimeVisible;
     private Timer timer;
     private MyKeyAdapter keyAdapter;
+    private ScoreInterface score;
 
     /**
      * Creates new form Board
@@ -85,14 +86,20 @@ public class Board extends javax.swing.JPanel {
         int randomRow = (int) (Math.random() * NUM_ROWS);
         int randomCol = (int) (Math.random() * NUM_COLS);
         specialFood = new SpecialFood(randomRow, randomCol);
+        specialFoodTimeVisible = 20;
+        specialFoodVisible = true;
     }
 
     public int getSquareHeight() {
         return getHeight() / NUM_COLS;
     }
 
+    public void setScore(ScoreInterface scoreInterface) {
+        this.score = scoreInterface;
+    }
+
     public void initGame() {
-        
+
         if (timer != null && timer.isRunning()) {
             timer.stop();
         }
@@ -105,15 +112,22 @@ public class Board extends javax.swing.JPanel {
         timer.start();
     }
 
+    public void resetGame() {
+
+    }
+
     private void tick() {
         snake.move();
+
         if (snake.checkCollision(food)) {
             snake.eatFood(food);
             generateRandomFood();
+            score.incrementFoodScore();
         }
         if (snake.checkCollision(specialFood)) {
             snake.eatSpecialFood(specialFood);
             generateRandomSpecialFood();
+            score.incrementSpecialFoodScore();
         }
         repaint();
     }
@@ -132,6 +146,7 @@ public class Board extends javax.swing.JPanel {
         }
         if (specialFood != null) {
             specialFood.paint(g, getSquareWidth(), getSquareHeight());
+
         }
         Toolkit.getDefaultToolkit().sync();
     }

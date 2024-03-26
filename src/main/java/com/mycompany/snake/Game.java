@@ -18,8 +18,11 @@ public class Game extends javax.swing.JFrame {
     public Game() {
         initComponents();
         setLocationRelativeTo(null);
-        //board.setPreferredSize(new Dimension(getWidth() * Board.NUM_ROWS, getHeight() * Board.NUM_COLS));
-        
+        setPreferredSize(new Dimension(800, 700));
+        board.setScore(scoreBoard);
+        //ConfigDialog configDialog = new ConfigDialog(this, true);
+        //configDialog.setVisible(true);
+
         pack();
     }
 
@@ -36,27 +39,51 @@ public class Game extends javax.swing.JFrame {
         board = new com.mycompany.snake.Board();
         jMenuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItemNewGame = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        scoreBoard.setBorder(new javax.swing.border.MatteBorder(null));
-        scoreBoard.setMinimumSize(new java.awt.Dimension(40, 10));
-        scoreBoard.setOpaque(false);
-        scoreBoard.setPreferredSize(new java.awt.Dimension(40, 10));
         getContentPane().add(scoreBoard, java.awt.BorderLayout.PAGE_END);
         getContentPane().add(board, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("File");
+
+        jMenuItemNewGame.setText("New Game");
+        jMenuItemNewGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNewGameActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemNewGame);
+        jMenu1.add(jSeparator1);
+
+        jMenuItemExit.setText("Exit");
+        jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemExit);
+
         jMenuBar.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("About");
         jMenuBar.add(jMenu2);
 
         setJMenuBar(jMenuBar);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewGameActionPerformed
+        //board.restartGame();
+    }//GEN-LAST:event_jMenuItemNewGameActionPerformed
+
+    private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,6 +125,9 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar;
+    private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemNewGame;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private com.mycompany.snake.ScoreBoard scoreBoard;
     // End of variables declaration//GEN-END:variables
 }

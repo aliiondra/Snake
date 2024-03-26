@@ -11,18 +11,24 @@ import javax.swing.JPanel;
  *
  * @author alu11563090
  */
-public class ScoreBoard extends JPanel implements ScoreInterface{
+public class ScoreBoard extends JPanel implements ScoreInterface {
     
     private JLabel jLabelScore;
     
     public ScoreBoard() {
         jLabelScore = new JLabel();
-        jLabelScore.setText("0");
+        jLabelScore.setText("Score for " + ConfigData.getInstance().getPlayerName() + ": 0");
         add(jLabelScore);
     }
     
-    public void incrementScore() {
-        int currentScore = ConfigData.getInstance().getScore() + 1;
+    public void incrementFoodScore() {
+        int currentScore = ConfigData.getInstance().getScore() + 10;
+        ConfigData.getInstance().setScore(currentScore);
+        updateScoreLabel();
+    }
+    
+    public void incrementSpecialFoodScore() {
+        int currentScore = ConfigData.getInstance().getScore() + 30;
         ConfigData.getInstance().setScore(currentScore);
         updateScoreLabel();
     }
@@ -33,6 +39,6 @@ public class ScoreBoard extends JPanel implements ScoreInterface{
     }
 
     private void updateScoreLabel() {
-        jLabelScore.setText("" + ConfigData.getInstance().getScore());
+        jLabelScore.setText("Score for " + ConfigData.getInstance().getPlayerName() + ": " + ConfigData.getInstance().getScore());
     }
 }

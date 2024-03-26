@@ -9,7 +9,8 @@ package com.mycompany.snake;
  * @author alu11563090
  */
 public interface ScoreInterface {
-    public void incrementScore();
+    public void incrementFoodScore();
+    public void incrementSpecialFoodScore();
     public void reset();
     
 }

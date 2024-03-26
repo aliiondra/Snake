@@ -92,17 +92,17 @@ public class Snake {
                 || node.getCol() < 0 || node.getCol() >= Board.NUM_COLS);
     }
     
-    /*public boolean checkSnakeCollision(Node node) {
+    public boolean checkSnakeCollision(Node node) {
         for (Node n : nodes) {
             if (n.getRow() == node.getRow() && n.getCol() == node.getCol()) {
                 return true;
             }
         }
         return false;
-    }*/
+    }
 
     public boolean checkCollision(Node node) {
-        Node head = nodes.get(0);
+        Node head = getHeadNode();
         return head.getRow() == node.getRow() && head.getCol() == node.getCol();
     }
 
