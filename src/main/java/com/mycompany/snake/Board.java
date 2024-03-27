@@ -36,11 +36,7 @@ public class Board extends javax.swing.JPanel {
                     snake.setDirection(Direction.LEFT);
                     break;
                 case KeyEvent.VK_SPACE:
-                    if (timer.isRunning()) {
-                        timer.stop();
-                    } else {
-                        timer.start();
-                    }
+                    pauseGame();
                     break;
             }
             repaint();
@@ -66,7 +62,6 @@ public class Board extends javax.swing.JPanel {
         snake = new Snake();
         generateRandomFood();
         generateRandomSpecialFood();
-        initGame();
         keyAdapter = new MyKeyAdapter();
         setFocusable(true);
         addKeyListener(keyAdapter);
@@ -99,7 +94,6 @@ public class Board extends javax.swing.JPanel {
     }
 
     public void initGame() {
-
         if (timer != null && timer.isRunning()) {
             timer.stop();
         }
@@ -113,12 +107,37 @@ public class Board extends javax.swing.JPanel {
     }
 
     public void resetGame() {
-
+        snake = new Snake();
+        generateRandomFood();
+        generateRandomSpecialFood();
+    }
+    
+    public void gameOver() {
+        
     }
 
+    public void pauseGame() {
+        if (timer.isRunning()) {
+            timer.stop();
+        } else {
+            timer.start();
+        }
+    }
+    
+    public void stopGame() {
+        timer.stop();
+    }
+
+    public void resumeGame() {
+        timer.start();
+    }
+    
     private void tick() {
         snake.move();
-
+        while (specialFoodTimeVisible > 0) {
+            specialFoodTimeVisible--;
+            specialFoodVisible = true;
+        }
         if (snake.checkCollision(food)) {
             snake.eatFood(food);
             generateRandomFood();
@@ -144,7 +163,7 @@ public class Board extends javax.swing.JPanel {
         if (food != null) {
             food.paint(g, getSquareWidth(), getSquareHeight());
         }
-        if (specialFood != null) {
+        if (specialFood != null || specialFoodVisible) {
             specialFood.paint(g, getSquareWidth(), getSquareHeight());
 
         }

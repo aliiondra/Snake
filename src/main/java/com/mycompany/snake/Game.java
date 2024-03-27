@@ -18,11 +18,12 @@ public class Game extends javax.swing.JFrame {
     public Game() {
         initComponents();
         setLocationRelativeTo(null);
-        setPreferredSize(new Dimension(800, 700));
+        ConfigDialog configDialog = new ConfigDialog(this, true);
+        configDialog.setVisible(true);
+        scoreBoard.updateScoreLabel();
+        board.initGame();
         board.setScore(scoreBoard);
-        //ConfigDialog configDialog = new ConfigDialog(this, true);
-        //configDialog.setVisible(true);
-
+        setPreferredSize(new Dimension(800, 700));
         pack();
     }
 
@@ -43,6 +44,9 @@ public class Game extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItemHowToPlay = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().add(scoreBoard, java.awt.BorderLayout.PAGE_END);
@@ -50,6 +54,7 @@ public class Game extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
+        jMenuItemNewGame.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItemNewGame.setText("New Game");
         jMenuItemNewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,6 +64,7 @@ public class Game extends javax.swing.JFrame {
         jMenu1.add(jMenuItemNewGame);
         jMenu1.add(jSeparator1);
 
+        jMenuItemExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItemExit.setText("Exit");
         jMenuItemExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +75,27 @@ public class Game extends javax.swing.JFrame {
 
         jMenuBar.add(jMenu1);
 
-        jMenu2.setText("About");
+        jMenu2.setText("Help");
+
+        jMenuItemHowToPlay.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.ALT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemHowToPlay.setText("How to play");
+        jMenuItemHowToPlay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHowToPlayActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemHowToPlay);
+        jMenu2.add(jSeparator2);
+
+        jMenuItemInfo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemInfo.setText("About..");
+        jMenuItemInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInfoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemInfo);
+
         jMenuBar.add(jMenu2);
 
         setJMenuBar(jMenuBar);
@@ -78,12 +104,25 @@ public class Game extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewGameActionPerformed
-        //board.restartGame();
+        board.resetGame();
+        scoreBoard.reset();
     }//GEN-LAST:event_jMenuItemNewGameActionPerformed
 
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItemExitActionPerformed
+
+    private void jMenuItemInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInfoActionPerformed
+        AboutDialog aboutDialog = new AboutDialog(this, true);
+        board.stopGame();
+        aboutDialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItemInfoActionPerformed
+
+    private void jMenuItemHowToPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHowToPlayActionPerformed
+        HowToPlayDialog howToPlayDialog = new HowToPlayDialog(this, true);
+        board.stopGame();
+        howToPlayDialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItemHowToPlayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,8 +165,11 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemHowToPlay;
+    private javax.swing.JMenuItem jMenuItemInfo;
     private javax.swing.JMenuItem jMenuItemNewGame;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private com.mycompany.snake.ScoreBoard scoreBoard;
     // End of variables declaration//GEN-END:variables
 }

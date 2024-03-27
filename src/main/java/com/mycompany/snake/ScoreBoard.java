@@ -17,6 +17,7 @@ public class ScoreBoard extends JPanel implements ScoreInterface {
     
     public ScoreBoard() {
         jLabelScore = new JLabel();
+       
         jLabelScore.setText("Score for " + ConfigData.getInstance().getPlayerName() + ": 0");
         add(jLabelScore);
     }
@@ -38,7 +39,7 @@ public class ScoreBoard extends JPanel implements ScoreInterface {
         updateScoreLabel();
     }
 
-    private void updateScoreLabel() {
+    public void updateScoreLabel() {
         jLabelScore.setText("Score for " + ConfigData.getInstance().getPlayerName() + ": " + ConfigData.getInstance().getScore());
     }
 }
