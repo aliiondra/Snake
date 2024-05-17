@@ -18,6 +18,7 @@ public class ConfigDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Hello!");
     }
 
     /**

@@ -21,11 +21,13 @@ public class Game extends javax.swing.JFrame {
         ConfigDialog configDialog = new ConfigDialog(this, true);
         configDialog.setVisible(true);
         scoreBoard.updateScoreLabel();
+        scoreBoard.reset();
         board.initGame();
         board.setScore(scoreBoard);
         setPreferredSize(new Dimension(800, 700));
         pack();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,8 +106,12 @@ public class Game extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewGameActionPerformed
-        board.resetGame();
+        ConfigDialog configDialog = new ConfigDialog(this, true);
+        board.stopGame();
+        scoreBoard.stopTime();
+        configDialog.setVisible(true);
         scoreBoard.reset();
+        board.resetGame();
     }//GEN-LAST:event_jMenuItemNewGameActionPerformed
 
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed

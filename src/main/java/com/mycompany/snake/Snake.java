@@ -18,6 +18,7 @@ public class Snake {
     private List<Node> nodes;
     private Direction direction;
     private int nodesToGrow;
+    
 
     public Snake() {
         nodes = new ArrayList<Node>();
@@ -92,18 +93,35 @@ public class Snake {
                 || node.getCol() < 0 || node.getCol() >= Board.NUM_COLS);
     }
     
-    public boolean checkSnakeCollision(Node node) {
+    public boolean checkSnakeCollision() {
+    if (nodes.isEmpty()) {
+        return false;
+    }
+
+    Node head = getHeadNode();
+    for (int i = 1; i < nodes.size(); i++) {
+        Node currentNode = nodes.get(i);
+        if (head.getRow() == currentNode.getRow() && head.getCol() == currentNode.getCol()) {
+            return true;
+        }
+    }
+    return false;
+}
+    
+    
+    /*public boolean checkSnakeCollision(Node node) {
         for (Node n : nodes) {
             if (n.getRow() == node.getRow() && n.getCol() == node.getCol()) {
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     public boolean checkCollision(Node node) {
         Node head = getHeadNode();
         return head.getRow() == node.getRow() && head.getCol() == node.getCol();
+        
     }
 
     public void eatFood(Node node) {

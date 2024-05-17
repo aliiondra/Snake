@@ -6,6 +6,7 @@ package com.mycompany.snake;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.border.Border;
 
 /**
  *

@@ -54,6 +54,7 @@ public class Board extends javax.swing.JPanel {
     private Timer timer;
     private MyKeyAdapter keyAdapter;
     private ScoreInterface score;
+    private GameOverDialog gameOverDialog;
 
     /**
      * Creates new form Board
@@ -65,6 +66,7 @@ public class Board extends javax.swing.JPanel {
         keyAdapter = new MyKeyAdapter();
         setFocusable(true);
         addKeyListener(keyAdapter);
+        
     }
 
     public int getSquareWidth() {
@@ -110,10 +112,11 @@ public class Board extends javax.swing.JPanel {
         snake = new Snake();
         generateRandomFood();
         generateRandomSpecialFood();
+        initGame();
+        score.reset();
     }
     
     public void gameOver() {
-        
     }
 
     public void pauseGame() {
@@ -148,7 +151,14 @@ public class Board extends javax.swing.JPanel {
             generateRandomSpecialFood();
             score.incrementSpecialFoodScore();
         }
+        if (snake.checkSnakeCollision()) {
+            timer.stop();
+            GameOverDialog gameOverDialog = new GameOverDialog(this, true);
+            gameOverDialog.dispose();
+            
+        }
         repaint();
+        
     }
 
     @Override
