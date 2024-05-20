@@ -77,7 +77,7 @@ public class GameOverDialog extends javax.swing.JDialog {
                 + "Total points: " + ConfigData.getInstance().getScore());
     }
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButtonActionPerformed
 
     /**
