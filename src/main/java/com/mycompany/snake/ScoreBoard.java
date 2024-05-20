@@ -28,6 +28,7 @@ public class ScoreBoard extends JPanel implements ScoreInterface {
         jLabelTimer = new JLabel();
         jLabelTimer.setText("Time: 0 seconds");
         add(jLabelTimer);
+       
 
         seconds = 0;
         timer = new Timer(1000, new ActionListener() {

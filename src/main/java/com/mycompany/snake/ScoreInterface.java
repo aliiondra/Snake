@@ -12,5 +12,5 @@ public interface ScoreInterface {
     public void incrementFoodScore();
     public void incrementSpecialFoodScore();
     public void reset();
-    
+    public void stopTime();
 }

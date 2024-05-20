@@ -26,6 +26,17 @@ public class Game extends javax.swing.JFrame {
         board.setScore(scoreBoard);
         setPreferredSize(new Dimension(800, 700));
         pack();
+        setLocationRelativeTo(null);
+        setTitle("Snake Game");
+    }
+    
+    public void newGame() {
+        ConfigDialog configDialog = new ConfigDialog(this, true);
+        board.stopGame();
+        scoreBoard.stopTime();
+        configDialog.setVisible(true);
+        scoreBoard.reset();
+        board.resetGame();
     }
     
 
@@ -106,12 +117,7 @@ public class Game extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewGameActionPerformed
-        ConfigDialog configDialog = new ConfigDialog(this, true);
-        board.stopGame();
-        scoreBoard.stopTime();
-        configDialog.setVisible(true);
-        scoreBoard.reset();
-        board.resetGame();
+        newGame();
     }//GEN-LAST:event_jMenuItemNewGameActionPerformed
 
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed

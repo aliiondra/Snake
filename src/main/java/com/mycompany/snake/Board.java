@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
 /**
@@ -55,6 +56,7 @@ public class Board extends javax.swing.JPanel {
     private MyKeyAdapter keyAdapter;
     private ScoreInterface score;
     private GameOverDialog gameOverDialog;
+    private JFrame parentFrame;
 
     /**
      * Creates new form Board
@@ -66,7 +68,6 @@ public class Board extends javax.swing.JPanel {
         keyAdapter = new MyKeyAdapter();
         setFocusable(true);
         addKeyListener(keyAdapter);
-        
     }
 
     public int getSquareWidth() {
@@ -74,17 +75,32 @@ public class Board extends javax.swing.JPanel {
     }
 
     public void generateRandomFood() {
-        int randomRow = (int) (Math.random() * NUM_ROWS);
-        int randomCol = (int) (Math.random() * NUM_COLS);
+        int randomRow, randomCol;
+        do {
+            randomRow = (int) (Math.random() * NUM_ROWS);
+            randomCol = (int) (Math.random() * NUM_COLS);
+        } while (snake.collidesWith(randomRow, randomCol) || foodCollidesWithSpecialFood(randomRow, randomCol));
+
         food = new Food(randomRow, randomCol);
     }
 
     public void generateRandomSpecialFood() {
-        int randomRow = (int) (Math.random() * NUM_ROWS);
-        int randomCol = (int) (Math.random() * NUM_COLS);
+        int randomRow, randomCol;
+        do {
+            randomRow = (int) (Math.random() * NUM_ROWS);
+            randomCol = (int) (Math.random() * NUM_COLS);
+        } while (snake.collidesWith(randomRow, randomCol) || foodCollidesWithSpecialFood(randomRow, randomCol));
+
         specialFood = new SpecialFood(randomRow, randomCol);
         specialFoodTimeVisible = 20;
         specialFoodVisible = true;
+    }
+
+    private boolean foodCollidesWithSpecialFood(int row, int col) {
+        if (specialFoodVisible) {
+            return specialFood.getRow() == row && specialFood.getCol() == col;
+        }
+        return false;
     }
 
     public int getSquareHeight() {
@@ -115,8 +131,12 @@ public class Board extends javax.swing.JPanel {
         initGame();
         score.reset();
     }
-    
+
     public void gameOver() {
+        stopGame();
+        score.stopTime();
+        GameOverDialog gameOverDialog = new GameOverDialog(parentFrame, true);
+        gameOverDialog.setVisible(true);
     }
 
     public void pauseGame() {
@@ -126,7 +146,7 @@ public class Board extends javax.swing.JPanel {
             timer.start();
         }
     }
-    
+
     public void stopGame() {
         timer.stop();
     }
@@ -134,12 +154,16 @@ public class Board extends javax.swing.JPanel {
     public void resumeGame() {
         timer.start();
     }
-    
+
     private void tick() {
         snake.move();
-        while (specialFoodTimeVisible > 0) {
+        if (specialFoodVisible) {
             specialFoodTimeVisible--;
-            specialFoodVisible = true;
+            if (specialFoodTimeVisible <= 0) {
+                specialFoodVisible = false;
+            }
+        } else {
+            generateRandomSpecialFood();
         }
         if (snake.checkCollision(food)) {
             snake.eatFood(food);
@@ -151,14 +175,11 @@ public class Board extends javax.swing.JPanel {
             generateRandomSpecialFood();
             score.incrementSpecialFoodScore();
         }
-        if (snake.checkSnakeCollision()) {
-            timer.stop();
-            GameOverDialog gameOverDialog = new GameOverDialog(this, true);
-            gameOverDialog.dispose();
-            
+        if (snake.checkSelfCollision() || snake.checkBorderCollision()) {
+            gameOver();
         }
         repaint();
-        
+
     }
 
     @Override

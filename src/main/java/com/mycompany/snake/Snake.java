@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.border.Border;
 
 /**
  *
@@ -78,7 +79,7 @@ public class Snake {
                 break;
         }
         Node newNode = new Node(currentRow, currentCol);
-        if (canMove(newNode)) {
+        if (canMove()) {
                 nodes.add(0, newNode);
             if (nodesToGrow == 0) {
                 nodes.remove(getTailNode());
@@ -87,27 +88,40 @@ public class Snake {
             }
         }
     }
+    
+    /*public boolean canMove(int headRow, int headCol) {
+        if (headRow < 0 || headRow >= Board.NUM_ROWS || headCol < 0 || headCol >= Board.NUM_COLS) {
+            return true;
+        }
+        
+        for (Node n : nodes){
+            if (n.getRow() == headRow && n.getCol() == headCol) {
+                return true;
+            }
+        }
+        return false;
+    }*/
 
-    public boolean canMove(Node node) {
+    public boolean canMove() {
+        Node node = getHeadNode();
         return !(node.getRow() < 0 || node.getRow() >= Board.NUM_ROWS
                 || node.getCol() < 0 || node.getCol() >= Board.NUM_COLS);
     }
     
-    public boolean checkSnakeCollision() {
-    if (nodes.isEmpty()) {
-        return false;
+    public boolean checkBorderCollision() {
+        Node head = getHeadNode();
+        return head.getRow() < 0 || head.getRow() >= Board.NUM_ROWS
+                || head.getCol() < 0 || head.getCol() >= Board.NUM_COLS;
     }
-
-    Node head = getHeadNode();
-    for (int i = 1; i < nodes.size(); i++) {
-        Node currentNode = nodes.get(i);
-        if (head.getRow() == currentNode.getRow() && head.getCol() == currentNode.getCol()) {
-            return true;
-        }
-    }
-    return false;
-}
     
+     public boolean collidesWith(int row, int col) {
+        // Verifica si la cabeza de la serpiente colisiona con las coordenadas
+        if (nodes.isEmpty()) {
+            return false; // Si la serpiente está vacía, no hay colisión
+        }
+        Node head = getHeadNode(); // Obtener la cabeza de la serpiente
+        return head.getRow() == row && head.getCol() == col;
+    }
     
     /*public boolean checkSnakeCollision(Node node) {
         for (Node n : nodes) {
@@ -117,6 +131,18 @@ public class Snake {
         }
         return false;
     }*/
+    
+    
+    public boolean checkSelfCollision() {
+        Node head = getHeadNode();
+        for (int i = 1; i < nodes.size(); i++) {
+            Node node = nodes.get(i);
+            if (head.getRow() == node.getRow() && head.getCol() == node.getCol()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public boolean checkCollision(Node node) {
         Node head = getHeadNode();

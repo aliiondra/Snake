@@ -31,7 +31,7 @@ public class AboutDialog extends JDialog {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("Hecho por Alin Ionescu");
+        jTextArea1.setText("Project developed by Alin Ionescu");
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
