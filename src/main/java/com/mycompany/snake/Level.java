@@ -5,8 +5,7 @@
 package com.mycompany.snake;
 
 /**
- *
- * @author alu11563090
+ * Enumeración que representa los niveles de dificultad del juego de la serpiente.
  */
 public enum Level {
     BEGINNER, INTERMEDIATE, DIFFICULT;

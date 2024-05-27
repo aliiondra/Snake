@@ -8,11 +8,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
- * @author alu11563090
+ * Clase de utilidad para dibujar un cuadrado en un componente gráfico.
  */
 public class Util {
     
+    /**
+     * Método estático para dibujar un cuadrado en un componente gráfico.
+     * @param g Objeto Graphics utilizado para dibujar.
+     * @param row Fila en la que se dibuja el cuadrado.
+     * @param col Columna en la que se dibuja el cuadrado.
+     * @param color Color del cuadrado.
+     * @param squareWidth Ancho del cuadrado.
+     * @param squareHeight Alto del cuadrado.
+     */
     public static void drawSquare(Graphics g, int row, int col, Color color,
                                     int squareWidth, int squareHeight) {
         int x = col * squareWidth;

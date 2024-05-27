@@ -4,21 +4,17 @@
  */
 package com.mycompany.snake;
 
-
 /**
- *
- * @author alu11563090
- */
+* Diálogo de configuración que permite al usuario establecer su nombre y nivel de dificultad
+*/
 public class ConfigDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form ConfigDialog
-     */
+    // Constructor de ConfigDialog
     public ConfigDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        setLocationRelativeTo(null);
-        setTitle("Hello!");
+        super(parent, modal); // Llama al constructor de la superclase con el marco principal y el indicador modal
+        initComponents(); // Inicializa los componentes del diálogo
+        setLocationRelativeTo(null); // Centra el diálogo en la pantalla
+        setTitle("Hello!"); // Establece el título del diálogo
     }
 
     /**
@@ -93,16 +89,20 @@ public class ConfigDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Establece el nombre del jugador en la configuración
     public void setPlayerName() {
         ConfigData.getInstance().setPlayerName(jTextField.getText());
     }
-    
+
+    // Maneja el evento de clic en el botón "Play!".
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActionPerformed
-        setPlayerName();
-        dispose();
+        setPlayerName(); 
+        dispose(); // Cierra el diálogo
     }//GEN-LAST:event_jButtonActionPerformed
 
+    // Maneja el evento de cambio de selección en el cuadro combinado (ComboBox).
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
+        // Actualiza el nivel de dificultad en la configuración según la selección del usuario
         switch (jComboBox.getSelectedIndex()) {
             case 0:
                 ConfigData.getInstance().setLevel(Level.BEGINNER);
@@ -121,9 +121,7 @@ public class ConfigDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jComboBoxActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    // Crea y muestra el diálogo
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

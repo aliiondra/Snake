@@ -7,29 +7,37 @@ package com.mycompany.snake;
 import java.awt.Dimension;
 
 /**
- *
- * @author alu11563090
+ * Clase que representa la ventana principal del juego.
  */
 public class Game extends javax.swing.JFrame {
 
     /**
-     * Creates new form Game
+     * Constructor de la clase Game.
+     * Inicializa los componentes de la interfaz gráfica del juego.
      */
     public Game() {
-        initComponents();
-        setLocationRelativeTo(null);
+        initComponents(); // Inicializa los componentes de la interfaz gráfica
+        // Abre un diálogo de configuración del juego y lo hace visible.
         ConfigDialog configDialog = new ConfigDialog(this, true);
         configDialog.setVisible(true);
+        // Actualiza la etiqueta de puntuación en el marcador.
         scoreBoard.updateScoreLabel();
+        // Reinicia el marcador.
         scoreBoard.reset();
+        // Inicializa el juego en el tablero.
         board.initGame();
+        // Configura el marcador en el tablero.
         board.setScore(scoreBoard);
         setPreferredSize(new Dimension(800, 700));
-        pack();
-        setLocationRelativeTo(null);
-        setTitle("Snake Game");
+        pack(); // Ajusta automáticamente el tamaño de la ventana.
+        setLocationRelativeTo(null); // Centra la ventana en la pantalla.
+        setTitle("Snake Game"); // Establece el título de la ventana.
     }
     
+    /**
+     * Método para iniciar un nuevo juego.
+     * Se ejecuta cuando se selecciona la opción "New Game" del menú.
+     */
     public void newGame() {
         ConfigDialog configDialog = new ConfigDialog(this, true);
         board.stopGame();
@@ -117,11 +125,11 @@ public class Game extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewGameActionPerformed
-        newGame();
+        newGame(); // Inicia un nuevo juego.
     }//GEN-LAST:event_jMenuItemNewGameActionPerformed
 
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
-        System.exit(0);
+        System.exit(0); // Cierra la aplicación.
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
     private void jMenuItemInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInfoActionPerformed
@@ -131,13 +139,14 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemInfoActionPerformed
 
     private void jMenuItemHowToPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHowToPlayActionPerformed
-        HowToPlayDialog howToPlayDialog = new HowToPlayDialog(this, true);
-        board.stopGame();
-        howToPlayDialog.setVisible(true);
+        HowToPlayDialog howToPlayDialog = new HowToPlayDialog(this, true);  // Abre un diálogo de información sobre el juego y lo hace visible.
+        board.stopGame(); // Detiene el juego en el tablero.
+        howToPlayDialog.setVisible(true); // Hace visible el diálogo.
     }//GEN-LAST:event_jMenuItemHowToPlayActionPerformed
 
     /**
-     * @param args the command line arguments
+     * Método principal para ejecutar la aplicación.
+     * Crea una instancia de la clase Game y la hace visible.
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -5,12 +5,12 @@
 package com.mycompany.snake;
 
 /**
- *
- * @author alu11563090
+ * Interfaz que define los métodos necesarios para manejar la puntuación en el juego.
  */
 public interface ScoreInterface {
     public void incrementFoodScore();
     public void incrementSpecialFoodScore();
     public void reset();
     public void stopTime();
+    public void resumeTime();
 }

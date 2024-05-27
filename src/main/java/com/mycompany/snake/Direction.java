@@ -5,8 +5,7 @@
 package com.mycompany.snake;
 
 /**
- *
- * @author alu11563090
+ * Enumeración que representa las direcciones posibles del movimiento de la serpiente.
  */
 public enum Direction {
     UP, DOWN, RIGHT, LEFT;

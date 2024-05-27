@@ -5,20 +5,22 @@
 package com.mycompany.snake;
 
 /**
- *
- * @author alu11563090
+ * Diálogo que muestra el mensaje de "Game Over".
  */
 public class GameOverDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form GameOverDialog
+     /**
+     * Crea un nuevo diálogo GameOverDialog.
+     *
+     * @param parent El marco principal del juego.
+     * @param modal  Indica si el diálogo es modal o no.
      */
     public GameOverDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-        gameOverDialogText();
-        jTextArea.setEditable(false);
-        setLocationRelativeTo(null);
+        super(parent, modal); // Llama al constructor de la superclase con el marco principal y el indicador modal
+        initComponents(); // Inicializa los componentes del diálogo
+        gameOverDialogText(); // Establece el texto del diálogo 
+        jTextArea.setEditable(false); // Hace que el área de texto no sea editable
+        setLocationRelativeTo(null); // Centra el diálogo en la pantalla
     }
 
     /**
@@ -72,16 +74,19 @@ public class GameOverDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Establece el mensaje de "Game Over" y muestra la puntuación total
     private void gameOverDialogText() {
         jTextArea.setText("You lost!\n"
                 + "Total points: " + ConfigData.getInstance().getScore());
     }
+    
+    // Maneja el evento de clic del botón "Close". Cierra el diálogo.
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActionPerformed
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_jButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
+     /**
+     * Código principal para crear y mostrar el diálogo.
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

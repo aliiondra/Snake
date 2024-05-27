@@ -14,15 +14,15 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 /**
- *
- * @author alu11563090
+ * Panel que representa el tablero del juego de Snake.
  */
 public class Board extends javax.swing.JPanel {
-
+    // Adaptador de teclado personalizado para manejar las teclas del juego
     class MyKeyAdapter extends KeyAdapter {
 
         @Override
         public void keyPressed(KeyEvent e) {
+            // Manejar las teclas para controlar la serpiente y pausar el juego
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
                     snake.setDirection(Direction.UP);
@@ -40,13 +40,15 @@ public class Board extends javax.swing.JPanel {
                     pauseGame();
                     break;
             }
-            repaint();
+            repaint(); // Volver a dibujar el panel después de cada acción
         }
     }
-
+    
+    // Constantes para el tamaño del tablero
     public static final int NUM_ROWS = 30;
     public static final int NUM_COLS = 30;
 
+    // Componentes del juego
     private Snake snake;
     private Food food;
     private SpecialFood specialFood;
@@ -59,7 +61,7 @@ public class Board extends javax.swing.JPanel {
     private JFrame parentFrame;
 
     /**
-     * Creates new form Board
+     * Constructor de la clase Board.
      */
     public Board() {
         snake = new Snake();
@@ -69,11 +71,17 @@ public class Board extends javax.swing.JPanel {
         setFocusable(true);
         addKeyListener(keyAdapter);
     }
-
+    
+    // Métodos para obtener el ancho y alto de un cuadrado del tablero
     public int getSquareWidth() {
         return getWidth() / NUM_ROWS;
     }
+    
+    public int getSquareHeight() {
+        return getHeight() / NUM_COLS;
+    }
 
+    // Método para generar comida en una posición aleatoria
     public void generateRandomFood() {
         int randomRow, randomCol;
         do {
@@ -84,6 +92,7 @@ public class Board extends javax.swing.JPanel {
         food = new Food(randomRow, randomCol);
     }
 
+    // Método para generar comida especial en una posición aleatoria
     public void generateRandomSpecialFood() {
         int randomRow, randomCol;
         do {
@@ -92,10 +101,11 @@ public class Board extends javax.swing.JPanel {
         } while (snake.collidesWith(randomRow, randomCol) || foodCollidesWithSpecialFood(randomRow, randomCol));
 
         specialFood = new SpecialFood(randomRow, randomCol);
-        specialFoodTimeVisible = 20;
+        specialFoodTimeVisible = 20; // Establecer el tiempo de visibilidad de la comida especial
         specialFoodVisible = true;
     }
 
+    // Método para verificar si la comida colisiona con la comida especial
     private boolean foodCollidesWithSpecialFood(int row, int col) {
         if (specialFoodVisible) {
             return specialFood.getRow() == row && specialFood.getCol() == col;
@@ -103,14 +113,11 @@ public class Board extends javax.swing.JPanel {
         return false;
     }
 
-    public int getSquareHeight() {
-        return getHeight() / NUM_COLS;
-    }
-
     public void setScore(ScoreInterface scoreInterface) {
         this.score = scoreInterface;
     }
-
+    
+// Método para inicializar el juego
     public void initGame() {
         if (timer != null && timer.isRunning()) {
             timer.stop();
@@ -124,6 +131,7 @@ public class Board extends javax.swing.JPanel {
         timer.start();
     }
 
+    // Método para reiniciar el juego
     public void resetGame() {
         snake = new Snake();
         generateRandomFood();
@@ -132,6 +140,7 @@ public class Board extends javax.swing.JPanel {
         score.reset();
     }
 
+    // Método para mostrar la pantalla de Game Over
     public void gameOver() {
         stopGame();
         score.stopTime();
@@ -139,22 +148,28 @@ public class Board extends javax.swing.JPanel {
         gameOverDialog.setVisible(true);
     }
 
+    // Método para pausar el juego
     public void pauseGame() {
         if (timer.isRunning()) {
             timer.stop();
+            score.stopTime();
         } else {
             timer.start();
+            score.resumeTime();
         }
     }
 
+    // Método para detener el juego
     public void stopGame() {
         timer.stop();
     }
 
+    // Método para reanudar el juego
     public void resumeGame() {
         timer.start();
     }
 
+    // Método que se ejecuta en cada tick del juego
     private void tick() {
         snake.move();
         if (specialFoodVisible) {
@@ -178,15 +193,13 @@ public class Board extends javax.swing.JPanel {
         if (snake.checkSelfCollision() || snake.checkBorderCollision()) {
             gameOver();
         }
-        repaint();
-
+        repaint(); // Volver a dibujar el panel después de cada tick
     }
 
+    // Método para dibujar los componentes del juego en el panel
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //g.setColor(Color.GRAY);
-        //g.fillRect(0, 0, getWidth(), getHeight());
         g.drawRect(0, 0, getWidth() / NUM_COLS * NUM_COLS, getHeight() / NUM_ROWS * NUM_ROWS);
         if (snake != null) {
             snake.paint(g, getSquareWidth(), getSquareHeight());
@@ -198,6 +211,6 @@ public class Board extends javax.swing.JPanel {
             specialFood.paint(g, getSquareWidth(), getSquareHeight());
 
         }
-        Toolkit.getDefaultToolkit().sync();
+        Toolkit.getDefaultToolkit().sync(); // Sincronizar el dibujo en pantalla
     }
 }
