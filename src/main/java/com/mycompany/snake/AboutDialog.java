@@ -36,7 +36,7 @@ public class AboutDialog extends JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE); // Cierra el diálogo al hacer clic en la 'X'
 
         jTextArea1.setEditable(false); // Hace que el área de texto no sea editable
-        jTextArea1.setColumns(18); // Establece el número de columnas del área de texto
+        jTextArea1.setColumns(20); // Establece el número de columnas del área de texto
         jTextArea1.setRows(1); // Establece el número de filas del área de texto
         jTextArea1.setText("Project developed by Alin Ionescu"); // Establece el texto del área de texto
         jScrollPane1.setViewportView(jTextArea1); // Agrega el área de texto a un panel de desplazamiento

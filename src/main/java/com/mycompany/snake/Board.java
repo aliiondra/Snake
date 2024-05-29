@@ -145,6 +145,7 @@ public class Board extends javax.swing.JPanel {
         generateRandomSpecialFood();
         initGame();
         score.reset();
+        requestFocus();
     }
 
     // Método para mostrar la pantalla de Game Over
@@ -156,7 +157,6 @@ public class Board extends javax.swing.JPanel {
         ConfigDialog configDialog = new ConfigDialog(parentFrame, true);
         configDialog.setVisible(true);
         resetGame();
-        
     }
 
     // Método para pausar el juego
