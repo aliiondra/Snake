@@ -42,6 +42,10 @@ public class Snake {
         this.direction = direction;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     // Dibuja la serpiente en el panel de juego.
     public void paint(Graphics g, int squareWidht, int squareHeight) {
         boolean firstNode = true;

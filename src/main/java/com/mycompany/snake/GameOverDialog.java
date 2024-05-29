@@ -21,6 +21,7 @@ public class GameOverDialog extends javax.swing.JDialog {
         gameOverDialogText(); // Establece el texto del diálogo 
         jTextArea.setEditable(false); // Hace que el área de texto no sea editable
         setLocationRelativeTo(null); // Centra el diálogo en la pantalla
+        setTitle("Game Over!"); // Establece el título del diálogo
     }
 
     /**

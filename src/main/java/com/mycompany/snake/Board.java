@@ -25,16 +25,24 @@ public class Board extends javax.swing.JPanel {
             // Manejar las teclas para controlar la serpiente y pausar el juego
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_UP:
-                    snake.setDirection(Direction.UP);
+                    if (snake.getDirection() != Direction.DOWN) { // Verificar si la serpiente no se está moviendo hacia abajo
+                        snake.setDirection(Direction.UP);
+                    }
                     break;
                 case KeyEvent.VK_DOWN:
-                    snake.setDirection(Direction.DOWN);
+                    if (snake.getDirection() != Direction.UP) { // Verificar si la serpiente no se está moviendo hacia arriba
+                        snake.setDirection(Direction.DOWN);
+                    }
                     break;
                 case KeyEvent.VK_RIGHT:
-                    snake.setDirection(Direction.RIGHT);
+                    if (snake.getDirection() != Direction.LEFT) { // Verificar si la serpiente no se está moviendo hacia la izquierda
+                        snake.setDirection(Direction.RIGHT);
+                    }
                     break;
                 case KeyEvent.VK_LEFT:
-                    snake.setDirection(Direction.LEFT);
+                    if (snake.getDirection() != Direction.RIGHT) { // Verificar si la serpiente no se está moviendo hacia la derecha
+                        snake.setDirection(Direction.LEFT);
+                    }
                     break;
                 case KeyEvent.VK_SPACE:
                     pauseGame();
@@ -57,7 +65,6 @@ public class Board extends javax.swing.JPanel {
     private Timer timer;
     private MyKeyAdapter keyAdapter;
     private ScoreInterface score;
-    private GameOverDialog gameOverDialog;
     private JFrame parentFrame;
 
     /**
@@ -105,7 +112,7 @@ public class Board extends javax.swing.JPanel {
         specialFoodVisible = true;
     }
 
-    // Método para verificar si la comida colisiona con la comida especial
+    // Método para verificar si la comida normal colisiona con la comida especial
     private boolean foodCollidesWithSpecialFood(int row, int col) {
         if (specialFoodVisible) {
             return specialFood.getRow() == row && specialFood.getCol() == col;
@@ -146,6 +153,10 @@ public class Board extends javax.swing.JPanel {
         score.stopTime();
         GameOverDialog gameOverDialog = new GameOverDialog(parentFrame, true);
         gameOverDialog.setVisible(true);
+        ConfigDialog configDialog = new ConfigDialog(parentFrame, true);
+        configDialog.setVisible(true);
+        resetGame();
+        
     }
 
     // Método para pausar el juego
